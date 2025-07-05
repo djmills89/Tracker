@@ -35,7 +35,7 @@
 
 .container {
     position: relative;
-    width: 150px;
+    min-width: 200px;
     height: 150px;
 }
 
@@ -83,4 +83,16 @@
 
 .previous-time {
     grid-column: 1 / span 2;
+}
+
+.tracking-container {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    column-gap: 2rem;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
 }
