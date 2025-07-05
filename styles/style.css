@@ -1,0 +1,86 @@
+:root {
+    --purple-600: hsl(246, 80%, 60%);
+
+     --orange-300: hsl(15, 100%, 70%);
+     --blue-300: hsl(195, 74%, 62%);
+     --pink-400: hsl(348, 100%, 68%);
+     --green-400: hsl(145, 58%, 55%);
+     --purple-700: hsl(264, 64%, 52%);
+     --yellow-300: hsl(43, 84%, 65%);
+
+     --navy-950: hsl(226, 43%, 10%);
+     --navy-900: hsl(235, 46%, 20%);
+     --purple-500: hsl(235, 45%, 61%);
+     --navy-200: hsl(236, 100%, 87%);
+
+     --work-bg-color: var(--orange-300);
+     --play-bg-color: var(--blue-300);
+     --study-bg-color: var(--pink-400);
+     --exercise-bg-color: var(--green-400);
+     --social-bg-color: var(--purple-700);
+     --care-bg-color: var(--yellow-300);
+
+     --fs-card-title: 1.8rem
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* html {
+    font-size: 62.5%;
+} */
+
+.container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+.card {
+    display: grid;
+    gap: 1rem;
+    justify-content: space-between;
+    grid-template-columns: 1fr 1fr;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 15px;
+    background-color: var(--navy-900);
+    color: white;
+    padding: 1rem;
+}
+
+.card-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--work-bg-color);
+    color: var(--work-bg-color);
+}
+
+.card,
+.card-bg {
+    border-radius: 1rem;
+}
+
+.title,
+.menu {
+    display: inline-block;
+    font-size: 18px;
+}
+
+.menu {
+    justify-self: end;
+}
+
+.time {
+    font-size: 32px;
+    grid-column: 1 / span 2;
+}
+
+.previous-time {
+    grid-column: 1 / span 2;
+}
