@@ -18,25 +18,31 @@ class TrackerCard extends HTMLElement {
             this.querySelector('.time').textContent = `${data.timeframes[timeframe].current}hrs`
             this.querySelector('.previous-time').textContent = `Last week - ${data.timeframes[timeframe].previous}hrs`
         }
-    setColor(data) {
+    setStyles(data) {
         switch (data.title) {
             case 'Play':
                 this.querySelector('.card-bg').style.backgroundColor = 'var(--play-bg-color)'
+                this.querySelector('.card-bg').style.backgroundImage = `url(../images/icon-play.svg)`
                 break
             case 'Work':
                 this.querySelector('.card-bg').style.backgroundColor = 'var(--work-bg-color)'
+                this.querySelector('.card-bg').style.backgroundImage = `url(../images/icon-work.svg)`
                 break
             case 'Study':
                 this.querySelector('.card-bg').style.backgroundColor = 'var(--study-bg-color)'
+                this.querySelector('.card-bg').style.backgroundImage  = `url(../images/icon-study.svg)`
                 break
             case 'Exercise':
                 this.querySelector('.card-bg').style.backgroundColor = 'var(--exercise-bg-color)'
+                this.querySelector('.card-bg').style.backgroundImage  = `url(../images/icon-exercise.svg)`
                 break
             case 'Social':
                 this.querySelector('.card-bg').style.backgroundColor = 'var(--social-bg-color)'
+                this.querySelector('.card-bg').style.backgroundImage  = `url(../images/icon-social.svg)`
                 break
             case 'Self Care':
                 this.querySelector('.card-bg').style.backgroundColor = 'var(--care-bg-color)'
+                this.querySelector('.card-bg').style.backgroundImage  = `url(../images/icon-self-care.svg)`
                 break
         }
         
@@ -51,7 +57,7 @@ fetch('../data.json')
         data.forEach(item => {
             const card = new TrackerCard()
             card.setData(item, 'monthly')
-            card.setColor(item)
+            card.setStyles(item)
             document.querySelector('.card-container').appendChild(card)
         })
     })

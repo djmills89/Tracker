@@ -7,13 +7,16 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   
   <title>Frontend Mentor | Time tracking dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
 
   <template id="template">
     <section class="container">
-      <div class="card-bg">1</div>
+      <div class="card-bg"></div>
       <div class="card">
         <h2 class="title">Work</h2>
         <p class="menu">...</p>
@@ -23,20 +26,23 @@
     </section>
   </template>
 
-  <section class="tracking-container">
-    <div class="profile-container">
-      <div class="profile">
-        <p>Report For</p>
-        <h1>Jeremy Robson</h1>
+  <main>
+    <section class="tracking-container">
+      <div class="profile-container">
+        <div class="profile">
+          <img src="./images/image-jeremy.png" alt="">
+          <p>Report For</p>
+          <h1>Jeremy Robson</h1>
+        </div>
+        <div class="times">
+          <p>Daily</p>
+          <p>Weekly</p>
+          <p>Monthly</p>
+        </div>
       </div>
-      <div class="times">
-        <p>Daily</p>
-        <p>Weekly</p>
-        <p>Monthly</p>
-      </div>
-    </div>
-    <div class="card-container"></div>
-  </section>
+      <div class="card-container"></div>
+    </section>
+  </main>
   
 <script src="./script/script.js"></script>
 </body>
