@@ -7,11 +7,32 @@ class TrackerCard extends HTMLElement {
 
         this.appendChild(content)
 
-        const cardBg = this.querySelector('.card-bg')
-        const card = this.querySelector('.card')
-        const title = this.querySelector('.title')
-        const time = this.querySelector('.time')
-        const previousTime = this.querySelector('.previous-time')
+        this.styleMap = {
+            'Work' : {
+                color: 'var(--work-bg-color)',
+                image: '../images/icon-work.svg'
+            },
+            'Play' : {
+                color: 'var(--play-bg-color)',
+                image: '../images/icon-play.svg'
+            },
+            'Study' : {
+                color: 'var(--study-bg-color)',
+                image: '../images/icon-study.svg'
+            },
+            'Exercise' : {
+                color: 'var(--exercise-bg-color)',
+                image: '../images/icon-exercise.svg'
+            },
+            'Social' : {
+                color: 'var(--social-bg-color)',
+                image: '../images/icon-social.svg'
+            },
+            'Self Care' : {
+                color: 'var(--care-bg-color)',
+                image: '../images/icon-self-care.svg'
+            },
+        }
     }
     setData(data, timeframe) {
             this.querySelector('.title').textContent = data.title
@@ -19,33 +40,13 @@ class TrackerCard extends HTMLElement {
             this.querySelector('.previous-time').textContent = `Last week - ${data.timeframes[timeframe].previous}hrs`
         }
     setStyles(data) {
-        switch (data.title) {
-            case 'Play':
-                this.querySelector('.card-bg').style.backgroundColor = 'var(--play-bg-color)'
-                this.querySelector('.card-bg').style.backgroundImage = `url(../images/icon-play.svg)`
-                break
-            case 'Work':
-                this.querySelector('.card-bg').style.backgroundColor = 'var(--work-bg-color)'
-                this.querySelector('.card-bg').style.backgroundImage = `url(../images/icon-work.svg)`
-                break
-            case 'Study':
-                this.querySelector('.card-bg').style.backgroundColor = 'var(--study-bg-color)'
-                this.querySelector('.card-bg').style.backgroundImage  = `url(../images/icon-study.svg)`
-                break
-            case 'Exercise':
-                this.querySelector('.card-bg').style.backgroundColor = 'var(--exercise-bg-color)'
-                this.querySelector('.card-bg').style.backgroundImage  = `url(../images/icon-exercise.svg)`
-                break
-            case 'Social':
-                this.querySelector('.card-bg').style.backgroundColor = 'var(--social-bg-color)'
-                this.querySelector('.card-bg').style.backgroundImage  = `url(../images/icon-social.svg)`
-                break
-            case 'Self Care':
-                this.querySelector('.card-bg').style.backgroundColor = 'var(--care-bg-color)'
-                this.querySelector('.card-bg').style.backgroundImage  = `url(../images/icon-self-care.svg)`
-                break
-        }
-        
+        const style = this.styleMap[data.title]
+
+        if (!style) return
+
+        const bg = this.querySelector('.card-bg')
+        bg.style.backgroundColor = style.color
+        bg.style.backgroundImage = `url(${style.image})`
     }
 }
 
