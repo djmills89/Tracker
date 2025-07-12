@@ -52,13 +52,36 @@ class TrackerCard extends HTMLElement {
 
 customElements.define('tracker-card' , TrackerCard)
 
+const profile = document.querySelector('.times')
+const timeFilter = profile.querySelectorAll('p')
+let currentFilter = 'Monthly'.toLowerCase()
+let cards = []
+let data = []
+
+timeFilter.forEach(filter => {
+    filter.addEventListener('click', (e) => {
+        timeFilter.forEach(f => f.classList.remove('active'))
+        e.target.classList.add('active')
+        currentFilter = e.target.textContent.toLowerCase()
+        renderCards()
+    })
+})
+
+function renderCards() {
+    const container = document.querySelector('.card-container')
+    container.innerHTML = ''
+
+    data.forEach(item => {
+        const card = new TrackerCard()
+        card.setData(item, currentFilter)
+        card.setStyles(item)
+        container.appendChild(card)
+    })
+}
+
 fetch('../data.json')
     .then(res => res.json())
-    .then(data => {
-        data.forEach(item => {
-            const card = new TrackerCard()
-            card.setData(item, 'monthly')
-            card.setStyles(item)
-            document.querySelector('.card-container').appendChild(card)
-        })
+    .then(json => {
+        data = json
+        renderCards()
     })

@@ -161,10 +161,13 @@ p {
     margin-block-start: .5rem;
 }
 
-.times > p:hover,
-.times > p:active {
+.times > p:hover {
     color: white;
     cursor: pointer;
+}
+
+.active {
+    color: white;
 }
 
 @media (max-width: 840px) {
