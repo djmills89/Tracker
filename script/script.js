@@ -55,7 +55,6 @@ customElements.define('tracker-card' , TrackerCard)
 const profile = document.querySelector('.times')
 const timeFilter = profile.querySelectorAll('p')
 let currentFilter = 'Monthly'.toLowerCase()
-let cards = []
 let data = []
 
 timeFilter.forEach(filter => {
