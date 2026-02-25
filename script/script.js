@@ -1,86 +1,52 @@
-class TrackerCard extends HTMLElement {
-    constructor() {
-        super()
+const cardContainer = document.getElementById('cardContainer')
+const template = document.getElementById('template')
+const profileFilers = document.querySelector('.profile__filters')
+let currentTimeframe = 'weekly'
 
-        const template = document.getElementById('template')
-        const content = template.content.cloneNode(true)
-
-        this.appendChild(content)
-
-        this.styleMap = {
-            'Work' : {
-                color: 'var(--work-bg-color)',
-                image: '../images/icon-work.svg'
-            },
-            'Play' : {
-                color: 'var(--play-bg-color)',
-                image: '../images/icon-play.svg'
-            },
-            'Study' : {
-                color: 'var(--study-bg-color)',
-                image: '../images/icon-study.svg'
-            },
-            'Exercise' : {
-                color: 'var(--exercise-bg-color)',
-                image: '../images/icon-exercise.svg'
-            },
-            'Social' : {
-                color: 'var(--social-bg-color)',
-                image: '../images/icon-social.svg'
-            },
-            'Self Care' : {
-                color: 'var(--care-bg-color)',
-                image: '../images/icon-self-care.svg'
-            },
-        }
-    }
-    setData(data, timeframe) {
-            this.querySelector('.title').textContent = data.title
-            this.querySelector('.time').textContent = `${data.timeframes[timeframe].current}hrs`
-            this.querySelector('.previous-time').textContent = `Last week - ${data.timeframes[timeframe].previous}hrs`
-        }
-    setStyles(data) {
-        const style = this.styleMap[data.title]
-
-        if (!style) return
-
-        const bg = this.querySelector('.card-bg')
-        bg.style.backgroundColor = style.color
-        bg.style.backgroundImage = `url(${style.image})`
-    }
-}
-
-customElements.define('tracker-card' , TrackerCard)
-
-const profile = document.querySelector('.times')
-const timeFilter = profile.querySelectorAll('p')
-let currentFilter = 'Monthly'.toLowerCase()
-let data = []
-
-timeFilter.forEach(filter => {
-    filter.addEventListener('click', (e) => {
-        timeFilter.forEach(f => f.classList.remove('active'))
-        e.target.classList.add('active')
-        currentFilter = e.target.textContent.toLowerCase()
-        renderCards()
+fetch('../data.json')
+.then((response) => {
+    if(!response.ok) return console.log('Oops! Something went wrong!')
+    
+    return response.json()
+})
+.then((activities) => {
+    loopActivities(activities)
+    profileFilers.addEventListener('click', (e) => {
+        currentTimeframe = e.target.textContent.toLowerCase()
+        e.currentTarget.querySelectorAll('p').forEach( el => el.classList.remove('filters__active'))
+        e.target.classList.toggle('filters__active')
+        cardContainer.innerHTML = ''
+        loopActivities(activities)
     })
 })
 
-function renderCards() {
-    const container = document.querySelector('.card-container')
-    container.innerHTML = ''
+function renderCards(card, activity, timeframe) {
+    const cardEl = card
+    const titleEl = cardEl.querySelector('.title')
+    const timeEl = cardEl.querySelector('.time')
+    const previousTimeEl = cardEl.querySelector('.previous-time')
+    const cardBackground = cardEl.querySelector('.card__bg')
 
-    data.forEach(item => {
-        const card = new TrackerCard()
-        card.setData(item, currentFilter)
-        card.setStyles(item)
-        container.appendChild(card)
-    })
+    titleEl.textContent = activity.title
+    titleEl.dataset.title = activity.title
+
+    timeEl.textContent = `${activity.timeframes[timeframe].current}hrs`
+    timeEl.dataset.currentTime = activity.timeframes[timeframe].current
+
+    previousTimeEl.textContent = `Last Week - ${activity.timeframes[timeframe].previous}hrs`
+    previousTimeEl.dataset.previousTime = activity.timeframes[timeframe].previous
+
+    cardBackground.classList.add(`${activity.title.toLowerCase() === 'self care' ? 'self-care' : activity.title.toLowerCase()}`)
+    return cardEl
 }
 
-fetch('../data.json')
-    .then(res => res.json())
-    .then(json => {
-        data = json
-        renderCards()
+function loopActivities(data) {
+    data.forEach(d => {
+    const clone = template.content.cloneNode(true)
+
+    renderCards(clone, d, currentTimeframe)
+        
+
+    cardContainer.appendChild(clone)
     })
+}

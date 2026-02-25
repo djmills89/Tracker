@@ -16,12 +16,14 @@
 
   <template id="template">
     <section class="container">
-      <div class="card-bg"></div>
+      <div class="card__bg"></div>
       <div class="card">
-        <h2 class="title">Work</h2>
-        <p class="menu">...</p>
-        <p class="time">32hrs</p>
-        <p class="previous-time">Last Week - 36hrs</p>
+        <div class="card__title-header">
+          <h2 class="title text-preset-5-medium" data-title="">Work</h2>
+          <p class="menu text-preset-5-medium">...</p>
+        </div>
+        <p class="time text-preset-1" data-current-time="">32hrs</p>
+        <p class="previous-time text-preset-6" data-previous-time="">Last Week - 36hrs</p>
       </div>
     </section>
   </template>
@@ -29,26 +31,28 @@
   <main>
     <section class="tracking-container">
 
-      <div class="profile-container">
-        <div class="profile">
-          <div class="profile-image">
+      <div class="profile">
+        <div class="profile__container">
+          <div class="profile__image">
             <img src="./images/image-jeremy.png" alt="">
           </div>
 
-          <div class="report-title">
-            <p>Report For</p>
-            <h1>Jeremy Robson</h1>
+          <div class="profile__report">
+            <p class="text-preset-6">Report For</p>
+            <h1 class="text-preset-2">Jeremy Robson</h1>
           </div>
         </div>
 
-        <div class="times">
-          <p>Daily</p>
-          <p>Weekly</p>
-          <p class="active">Monthly</p>
+        <div class="profile__filters">
+          <p class="text-preset-5 daily">Daily</p>
+          <p class="filters__active text-preset-5 weekly">Weekly</p>
+          <p class="text-preset-5 monthly">Monthly</p>
         </div>
       </div>
 
-      <div class="card-container"></div>
+      <div class="card-container" id="cardContainer">
+
+      </div>
 
     </section>
 
